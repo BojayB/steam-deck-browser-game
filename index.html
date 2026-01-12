@@ -3,17 +3,23 @@
 <head>
 <style>
 body {
-    background-color: rgb(50, 47, 79);
+    background-color: rgb(44, 27, 65);
     color: rgb(187, 135, 255);
+    font-size: x-large;
 }
 button {
-    background-color: rgb(50, 47, 79);
+    background-color: rgb(44, 27, 65);
+    color: rgb(187, 135, 255);
+}
+input {
+    background-color: transparent;
     color: rgb(187, 135, 255);
 }
 .italic {
     font-style: italic;
 }
 .hidden {
+    position: absolute;
     visibility: hidden;
 }
 .visible {
@@ -26,11 +32,15 @@ button {
 <span id="disT">made entirely on a steam deck (for now)</span>
 <span id="distI" class="italic"></span>
 <span id="two"></span>
+<audio id="jumpscare">
+    <source src="https://us-tuna-sounds-files.voicemod.net/3b5c4c47-4f5f-4a17-9f16-b2472ac9a69d-1761182996800.mp3">
+</audio>
 <br>
 <br>
 </div>
-<button id="disB">click</button>
 <input id="name" type="text" class="hidden">
+<button id="disB">click</button>
+
 
 <script>
 const disT = document.getElementById("disT");
@@ -39,54 +49,75 @@ const dist2 = document.getElementById("two");
 const disB = document.getElementById("disB");
 const name = document.getElementById("name");
 const hidden = document.getElementsByClassName("hidden");
-let usrName = "";
 let disP = "";
 let dispI ="";
 let disp2 = "";
 let dispB = "";
 let menu = true;
 let i = 0;
+let i2 = 0;
 disB.addEventListener("click", function () {
     if (i === 0) {
         disP = "Welcome!";
         dispB = "...";
-        ++i;
     } else if (i === 1) {
         disP = "...Hello?";
         dispB = "Hello.";
-        ++i;
     } else if (i === 2) {
         disP = "Wonderful, you're here!";
         dispB = "...";
-        ++i;
     } else if (i === 3) {
         disP = "That's something special, you know? ";
         dispI = "You're";
         disp2 = " here.";
         dispB = "...";
-        ++i;
     } else if (i === 4) {
         dispI = "";
         disp2 = "";
         disP = "Wait...";
         dispB = "...";
-        ++i;
     } else if (i === 5) {
         disP = "Who are you?";
         name.classList.remove("hidden");
         dispB = "...";
-        ++i;
-    } else if (i === 6) {
-        usrName = name.value;
+        } else if (i === 6) {
+            usrName = name.value;
+            if (i2 === 1){
+            disP = "I said to enter your name goofball!";
+            disT.textContent = disP;
+            return; 
+            } else if (name.value === "") {
+            disP = "Enter your name silly.";
+            disT.textContent = disP;
+            ++i2;
+            return;
+        }else if (name.value === "jono") {
+            window.open("https://www.youtube.com/watch?v=dQw4w9WgXcQ", '_blank');
+            return;
+        }  else if (name.value === "goofball") {
+            name.classList.add("hidden");
+            disP = `Smart one, ${usrName}`
+            disT.textContent = disP;
+            ++i;
+            return;
+        } else if (name.value === usrName) {
+        
         name.classList.add("hidden");
-        disP = `${usrName} huh? nice to meet you <3`;
+        disP = `Nice to meet you ${usrName} <3`;
         dispB = "...";
+    }} else if (i === 7) {
+        disP = "jumpscare";
+        disp2 = "AAHHH";
+    } else if (i === 8) {
+        disP = "jumpscare";
+        disp2 = "AAHHH";
     }
     
     disT.textContent = disP;
     disB.textContent = dispB;
     distI.textContent = dispI;
     dist2.textContent = disp2;
+    ++i;
 })
 </script>
 
